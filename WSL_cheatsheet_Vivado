@@ -1,4 +1,24 @@
+>>>>
+   21  sudo apt install locales
+   46  sudo apt install neovim
+   47  sudo apt install nvim
+   48  sudo snap install nvim
+   50  sudo snap install nvim --classic
+   53  sudo apt install firefox
+   67  sudo apt install libncurses-dev
+   70  sudo apt install libncurses-dev
+   82  sudo apt install tree
+   88  sudo apt install usbutils
 
+$$$ update the locale $$$
+   27  sudo update-locale LANG=en_US
+   28  vivado
+   29  nvim /etc/locale.gen
+   30  sudo nvim /etc/locale.gen
+   31  locale-gen
+   32  sudo locale-gen
+
+#########################################
 
 >>>> LINK <<<<
 https://boxlambda.readthedocs.io/en/latest/installation/#on-wsl
