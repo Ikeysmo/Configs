@@ -1,0 +1,53 @@
+
+
+>>>> LINK <<<<
+https://boxlambda.readthedocs.io/en/latest/installation/#on-wsl
+
+
+>>> GUIDE <<<<
+
+User-Level Access to the Arty A7 USB JTAG Adapter.
+OpenOCD might not have permission to access the USB JTAG adapter when run at the user level. To fix this issue, you need to add a rule to /etc/udev/rules.d. Create a file with the name 99-openocd.rules in the /etc/udev/rules.d directory. This file should have the following contents:
+
+# Original FT2232 VID:PID
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="666", GROUP="plugdev"
+
+
+On WSL
+USBIPD-WIN
+For USB device access to work at all on WSL, it's necessary to attach the USB device to WSL (by default, USB ports stay under native Windows control). This is done using usbipd-win, which can be installed from this location:
+
+https://github.com/dorssel/usbipd-win/releases.
+
+Additional info about connecting USB devices to WSL can be found here:
+
+https://learn.microsoft.com/en-us/windows/wsl/connect-usb.
+
+
+
+Udev
+On Ubuntu WSL, udev, the system service in charge of enforcing device permissions, isn't running by default. To fix this, add the following lines to /etc/wsl.conf:
+
+[boot]
+command="service udev start"
+Without udev running, OpenOCD or Vivado will not have access to the Arty USB JTAG adapter when executed at the user level.
+
+
+
+
+
+>>>>>>>>>>>>>>> LINK 2 <<<<<<<<<<<<<<
+
+https://www.reddit.com/r/FPGA/comments/14s4mya/running_vivado_on_wsl2_ubuntu/
+
+
+
+>>>>>>>>>>> cheat sheet <<<<<<<<<<<<<<<<<<<<
+
+>wsl --shutdown
+
+>usbipd list 
+
+>$$$>> >usbipd bind --busid 8-2   #administrator 
+>usbipd attach --wsl --busid 8-2
+>usbipd detach --busid 8-2
